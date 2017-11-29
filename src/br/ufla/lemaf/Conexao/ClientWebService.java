@@ -26,7 +26,6 @@ public class ClientWebService {
     //public static void main(String[] args) {
 
     public String Pesquisa(int i) {
-
         try {
 
             URL url = new URL("http://testes.ti.lemaf.ufla.br/api/Dicionario/" + i);

@@ -6,12 +6,12 @@
 package br.ufla.lemaf.Visão;
 
 import br.ufla.lemaf.Conexao.ClientWebService;
-import br.ufla.lemaf.Conexao.MyThread;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +22,8 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public ArrayList<String> listaPalavras = new ArrayList<String>();;
+    public ArrayList<String> listaPalavras = new ArrayList<String>();
+    public int Gatinhos;
 
     public Principal() {
         PreencheLista();
@@ -37,29 +38,30 @@ public class Principal extends javax.swing.JFrame {
         int i = 1;
         if (Palavra != null) {
             listaPalavras.add(Palavra.toUpperCase());
-            while ((Palavra != null) && i < 10) {
+            while ((Palavra != null)) {
 
                 Palavra = buscaPalavras.Pesquisa(i);
                 listaPalavras.add(Palavra.toUpperCase());
                 i++;
             }
         }
-        //MyThread t = new MyThread();
-        //t.start();
+        Gatinhos = i;
     }
 
     public void BuscaLista() {
         String retorno = null;
         int indice = 0;
-        for (int i = 0; i <= listaPalavras.size(); i++) {
-            if(listaPalavras.get(i).contains(jTextField1.getText().toUpperCase())){
+        for (int i = 0; i < listaPalavras.size(); i++) {
+            if (listaPalavras.get(i).contains(jTextField1.getText().toUpperCase())) {
                 retorno = listaPalavras.get(i);
                 indice = i;
+                JOptionPane.showMessageDialog(rootPane, "Indice da Palavra: " + indice + "\n Gatinhos mortos: " + Gatinhos);
                 break;
             }
         }
-        System.out.println(retorno);
-        System.out.println(indice);
+        if(retorno == null){
+            JOptionPane.showMessageDialog(rootPane, "Palavra não Encontrada!!!");
+        }
     }
 
     /**
@@ -135,16 +137,21 @@ public class Principal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
